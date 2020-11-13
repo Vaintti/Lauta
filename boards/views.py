@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 
 from .models import Board
@@ -12,4 +11,6 @@ def index(request):
 
 def board(request, url):
     item = get_object_or_404(Board, url=url)
-    return render(request, 'boards/board.html', {'board': item})
+    threads = item.thread_set.all()
+    sorted_threads = sorted(threads, key=lambda t: t.last_message_created_at())
+    return render(request, 'boards/board.html', {'board': item, 'threads': sorted_threads})

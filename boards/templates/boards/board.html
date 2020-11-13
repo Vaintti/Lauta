@@ -1,1 +1,10 @@
 {{ board.name }}
+{% if threads %}
+    <ul>
+        {% for thread in threads %}
+            <li>{{ thread }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No threads available</p>
+{% endif %}
