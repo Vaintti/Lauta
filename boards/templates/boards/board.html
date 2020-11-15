@@ -3,6 +3,7 @@
     <ul>
         {% for thread in threads %}
             <li>{{ thread }}</li>
+            <li>{{ thread.message_set.all|dictsort:"created_at"|slice:"1" }}</li>
         {% endfor %}
     </ul>
 {% else %}
