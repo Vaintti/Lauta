@@ -6,10 +6,10 @@ from boards.models import Board
 
 class Thread(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
-    uuid = models.UUIDField(default=uuid4, editable=False)
+    uuid = models.TextField(default=str(uuid4().int), editable=False)
 
     def __str__(self):
-        return str(self.uuid.int)
+        return self.uuid
 
     def last_message_created_at(self):
         return self.message_set.all().order_by('created_at')[0].created_at
